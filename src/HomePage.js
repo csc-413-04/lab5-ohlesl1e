@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import {loadAllMessges} from './redux/actions';
-//import axios from 'axios';
+import axios from 'axios';
 
 class Message extends Component{
     render(){
@@ -32,10 +32,16 @@ class HomePage extends Component {
     }
 
     sendSomeData(){
-        /*axios({
+        axios({
             method: 'POST'
         })
-        */
+    }
+
+    componentDidMount(){
+        axios.get('/api/messages')
+        .then((res) => {
+            console.log();
+        })
     }
 
     render() {
