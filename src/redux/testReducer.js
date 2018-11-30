@@ -1,5 +1,6 @@
 const initialState = {
     test: 'test value',
+    messages:['something']
 };
 
 const testReducer = (state = initialState, action) => {

@@ -64,6 +64,13 @@ html, body{
   display: inline-block;
 }
 
+.messages{
+    padding: 20px;
+    overflow-y: scroll;
+    flex-grow: 2;
+    background: #dedede;
+}
+
 .page-content{
   width: 900px;
   margin: 0 auto;
