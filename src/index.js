@@ -3,8 +3,36 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {importMessage} from './redux/actions';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+
+const websocket = new WebSocket('ws://localhost:1234/ws');
+
+websocket.onopen = () => {
+    console.log('ws has connected!');
+}
+
+websocket.onmessage = (e) => {
+    const data = JSON.parse(e.data);
+    switch (data.tyoe) {
+        case 'MESSAGE_BROADCAST':
+            store.dispatch(importMessage(data.message));
+            break;
+        default:
+
+    }
+    console.log(e);
+}
+
+websocket.onerror = (e) => {
+    console.log(e);
+}
+
+websocket.onclose = (e) => {
+    console.log('ws closed');
+    console.log(e);
+}
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

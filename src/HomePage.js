@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import {loadAllMessges} from './redux/actions';
+import {loadAllMessages} from './redux/actions';
+import {importMessage} from './redux/actions';
 import axios from 'axios';
 
 class Message extends Component{
@@ -33,14 +34,29 @@ class HomePage extends Component {
 
     sendSomeData(){
         axios({
-            method: 'POST'
+            method: 'POST',
+            url: '/api/sendmessage',
+            data: {
+                message: this.state.messageValue
+            }
+        })
+        .then((res) => {
+            console.log(res);
+        }).catch((e) => {
+            console.log(e);
+        });
+        this.setState({
+            messageValue: '',
         })
     }
 
     componentDidMount(){
         axios.get('/api/messages')
         .then((res) => {
-            console.log();
+            console.log(res.data);
+            this.props.loadAllMessages(res.data);
+        }).catch((e) => {
+            console.log(e);
         })
     }
 
@@ -67,7 +83,7 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {loadAllMessages};
 
 export default connect(
     mapStateToProps,
