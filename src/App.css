@@ -71,6 +71,14 @@ html, body{
     background: #dedede;
 }
 
+.message{
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 3px;
+    text-align: right;
+}
+
 .page-content{
   width: 900px;
   margin: 0 auto;

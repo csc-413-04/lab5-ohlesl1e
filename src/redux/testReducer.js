@@ -4,6 +4,7 @@ const initialState = {
 };
 
 const testReducer = (state = initialState, action) => {
+    console.log(action);
     switch (action.type) {
         case 'LOAD_MESSAGES':
             return Object.assign({}, state, {
@@ -12,7 +13,7 @@ const testReducer = (state = initialState, action) => {
             break;
         case 'IMPORT_MESSAGE':
             const newMessages = state.messages.slice(0);
-            newMessages.unshift(action.message);
+            newMessages.push(action.message);
             return Object.assign({}, state,{
                 messages: newMessages,
             })
